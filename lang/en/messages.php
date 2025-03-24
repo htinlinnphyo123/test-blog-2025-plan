@@ -1,0 +1,36 @@
+<?php
+
+return [
+    'login_title' => "Admin Login Page.",
+    'title' => 'This is English Language Title.',
+    'user_name' => 'User Name',
+    'password' => 'User Password',
+    'wrong_credential' => "User's credentials was something wrong!",
+    'login_btn' => "Login",
+    'logout_btn' => "Logout",
+    'profile_btn' => "Profile",
+    'save' => "Save",
+    'update' => "Update",
+    'create' => "Create",
+    'cancel' => "Cancel",
+    'search_item' => "Search for items",
+    'search' => "Search",
+    'edit' => "Edit",
+    'view' => "View",
+    'delete' => "Delete",
+    'send' => "Send",
+    'showing' => "Showing",
+    'results' => "Results",
+    'to' => "To",
+    'of' => "Of",
+    'previous' => "Prev",
+    'next' => "Next",
+    '20' => '20',
+    '50' => '50',
+    '100' => '100',
+    'are_you_sure' => "Are you sure?",
+    'login_again' => "Want to logout will you be login again!",
+    'yes_logout' => "Yes,Logout!",
+    
+    
+];

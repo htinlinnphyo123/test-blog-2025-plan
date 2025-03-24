@@ -1,0 +1,63 @@
+[type='checkbox']:focus,[type='radio']:focus {
+    --tw-ring-offset-width: 0;
+}
+
+/* Styles when body has the .loading-overlay class */
+body.loading-overlay {
+    position: relative;
+    overflow: hidden; /* Prevent scrolling when loading */
+  }
+  
+  body.loading-overlay::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background */
+    z-index: 9998;
+  }
+  
+  body.loading-overlay .custom-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    border: 12px solid #f3f3f3; /* Light grey */
+    border-top: 12px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Animation for spinner */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .dark .ql-container {
+    background-color: #ffff; /* Dark background (gray-800) */
+    color: black;          /* Light text (gray-300) */
+    border-color: #334155;   /* Darker border (gray-700) */
+  }
+  
+  .dark .ql-editor {
+    background-color: transparent;          /* Light text */
+  }
+  
+  .dark .ql-toolbar {
+    background-color: #334155; 
+    border-color: #475569; 
+  }
+  
+  .dark .ql-snow .ql-stroke {
+    stroke: #e2e8f0;
+  }
+  
+  .dark .ql-snow .ql-fill {
+    fill: #e2e8f0;
+  }
+  

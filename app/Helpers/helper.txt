@@ -1,0 +1,24 @@
+function retrieveImage($path) : string
+    {
+        return $path ? Storage::disk('digitalocean')->url($path) : asset('assets/img/default_user.jpeg');
+    }
+
+    function retrieveResource($path) : string
+    {
+        return Storage::disk('digitalocean')->temporaryUrl($path, now()->addMinutes(20));
+    }
+
+    function uploadImage($file,$directory,$privacy='public') : String
+    {
+        return Storage::disk('digitalocean')->putFile($directory, $file,$privacy);
+    }
+
+    function deleteImage($path) : void
+    {
+        Storage::disk('digitalocean')->delete($path);
+    }
+
+    function retrieveMemberImage($path) : string
+    {
+        return $path ? Storage::disk('digitalocean')->url($path) : asset('assets/img/default_member.jpeg');
+    }
