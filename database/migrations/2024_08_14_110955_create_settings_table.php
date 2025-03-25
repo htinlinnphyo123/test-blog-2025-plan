@@ -17,11 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('key')->nullable();
             $table->string('value')->nullable();
-            $table->string('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
     }
 

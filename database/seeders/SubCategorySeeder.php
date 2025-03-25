@@ -17,9 +17,7 @@ class SubCategorySeeder extends Seeder
         for ($x = 1; $x <= 25; $x++) {
             DB::table('subcategories')->insert([
                 'name' => 'Subcategory ' . $x,
-                'name_other' => 'ប្រភេទ ' . $x,
                 'description' => $x . ' Description in English ... ',
-                'description_other' => $x . ' Description in Cambodia ... ',
                 'category_id' => rand(1, 5),
             ]);
         }

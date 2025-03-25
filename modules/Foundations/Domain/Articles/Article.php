@@ -22,7 +22,6 @@ use BasicDashboard\Foundations\Domain\Subcategories\Subcategory;
  *
  */
 //if you want to audit this model uncomment below code and import
-#[ObservedBy([AuditObserver::class])]
 class Article extends Model
 {
     use HasFactory, SoftDeletes;

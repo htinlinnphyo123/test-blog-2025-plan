@@ -21,9 +21,7 @@ class CategorySeeder extends Seeder
         for ($x = 1; $x <= 5; $x++) {
             DB::table('categories')->insert([
                 'name' => 'ប្រភេទ ' . $x,
-                'name_other' => 'Category' . $x,
                 'description' => $x . ' Description in Cambodia ... ',
-                'description_other' => $x . ' Description in English ... ',
             ]);
         }
 

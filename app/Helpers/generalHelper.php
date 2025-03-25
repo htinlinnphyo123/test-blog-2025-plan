@@ -13,23 +13,25 @@ if (!function_exists('changeParam')) {
 if (!function_exists('customEncoder')) {
     function customEncoder($plainText, $static = 0)
     {
+        return $plainText;
         // $randomNumber = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, config('numbers.hash_length'));
         // $randomLetter2 = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, config('numbers.hash_length'));
-        $encryptId = strtr(base64_encode($plainText), '---', '===');
-        if ($static) {
-            return $static . $encryptId . $static;
-        } else {
-            return rand(10000, 99999) . $encryptId . rand(10000, 99999);
-        }
+        // $encryptId = strtr(base64_encode($plainText), '---', '===');
+        // if ($static) {
+        //     return $static . $encryptId . $static;
+        // } else {
+        //     return rand(10000, 99999) . $encryptId . rand(10000, 99999);
+        // }
     }
 }
 
 if (!function_exists('customDecoder')) {
     function customDecoder($b64Text)
     {
-        $decryptId = substr($b64Text, 0, "-" . config('numbers.hash_length'));
-        $decryptId = substr($decryptId, config('numbers.hash_length'));
-        return base64_decode(strtr($decryptId, '===', '---'));
+        return $b64Text;
+        // $decryptId = substr($b64Text, 0, "-" . config('numbers.hash_length'));
+        // $decryptId = substr($decryptId, config('numbers.hash_length'));
+        // return base64_decode(strtr($decryptId, '===', '---'));
     }
 }
 
@@ -47,7 +49,6 @@ if (!function_exists('permissionCheck')) {
         }
         return false;
     }
-
 }
 
 if (!function_exists('uploadImageToDigitalOcean')) {
@@ -55,6 +56,20 @@ if (!function_exists('uploadImageToDigitalOcean')) {
     {
         $uploadMedia = Storage::disk('digitalocean')->putFile($directory, $file, $privacy);
         return $uploadMedia ? $uploadMedia : null;
+    }
+}
+
+if (!function_exists('uploadFilesToDigitalOcean')) {
+    function uploadFilesToDigitalOcean(array $files, $directory, $privacy = 'public'): array
+    {
+        $uploadedFiles = [];
+        foreach ($files as $file) {
+            $uploadMedia = Storage::disk('digitalocean')->putFile($directory, $file, $privacy);
+            if ($uploadMedia) {
+                $uploadedFiles[] = $uploadMedia;
+            }
+        }
+        return $uploadedFiles;
     }
 }
 

@@ -21,10 +21,7 @@ class DashboardService extends BaseController
      */
     public function index()
     {
-        $mostViewArticles = $this->articleRepositoryInterface->getTheMostView(5);
-        $mostViewArticles = ArticleResource::collection($mostViewArticles)->response()->getData(true);
-        $onlineUsers = $this->getOnlineUsers()->toArray();
-        return view('admin.dashboard.index',compact('mostViewArticles','onlineUsers'));
+        return view('admin.dashboard.index');
     }
 
     protected function getOnlineUsers() : Collection

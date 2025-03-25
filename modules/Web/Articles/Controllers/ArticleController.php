@@ -45,7 +45,7 @@ class ArticleController extends BaseController
 
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
-    public function store(StoreArticleRequest $request): JsonResponse
+    public function store(StoreArticleRequest $request): RedirectResponse
     {
         return $this->articleService->store($request->all());
     }

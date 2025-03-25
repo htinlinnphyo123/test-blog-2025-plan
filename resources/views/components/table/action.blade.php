@@ -17,16 +17,8 @@
             class="{{ config('config.dropdown.wrapper') }} border border-gray-200 shadow-2xl">
             <ul class="{{ config('config.dropdown.ul') }} min-w-32" aria-labelledby="action_{{ $id }}">
                 <x-table.show route="{{ $field }}.show" :id="$id" />
-                @php
-                    $editPermission = 'edit ' . $field;
-                    $deletePermission = 'delete ' . $field;
-                @endphp
-                @if (permissionCheck([$editPermission]))
-                    <x-table.edit route="{{ $field }}.edit" :id="$id" />
-                @endif
-                @if (permissionCheck([$deletePermission]))
-                    <x-table.delete route="{{ $field }}.destroy" :id="$id" :isRole="$isRole" />
-                @endif
+                <x-table.edit route="{{ $field }}.edit" :id="$id" />
+                <x-table.delete route="{{ $field }}.destroy" :id="$id" :isRole="$isRole" />
                 {{ $slot }}
             </ul>
         </div>

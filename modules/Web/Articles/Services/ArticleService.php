@@ -1,22 +1,24 @@
 <?php
 namespace BasicDashboard\Web\Articles\Services;
 
-use BasicDashboard\Foundations\Domain\Articles\Repositories\ArticleRepositoryInterface;
-use BasicDashboard\Foundations\Domain\Categories\Repositories\CategoryRepositoryInterface;
-use BasicDashboard\Web\Articles\Jobs\StoreArticleJob;
-use BasicDashboard\Web\Articles\Jobs\UpdateArticleJob;
-use BasicDashboard\Web\Articles\Resources\ArticleResource;
-use BasicDashboard\Web\Articles\Resources\EditArticleResource;
-use BasicDashboard\Web\Articles\Traits\SendTelegramNotification;
-use BasicDashboard\Web\Common\BaseController;
 use Exception;
-use function Illuminate\Support\defer;
+use Illuminate\View\View;
+use Illuminate\Support\Arr;
+use Ladumor\OneSignal\OneSignal;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Arr;
+use function Illuminate\Support\defer;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\View\View;
-use Ladumor\OneSignal\OneSignal;
+use BasicDashboard\Web\Common\BaseController;
+use BasicDashboard\Web\Articles\Jobs\StoreArticleJob;
+use BasicDashboard\Web\Articles\Jobs\UpdateArticleJob;
+use BasicDashboard\Foundations\Domain\Categories\Category;
+use BasicDashboard\Web\Articles\Resources\ArticleResource;
+use BasicDashboard\Web\Articles\Resources\EditArticleResource;
+use BasicDashboard\Foundations\Domain\Subcategories\Subcategory;
+use BasicDashboard\Web\Articles\Traits\SendTelegramNotification;
+use BasicDashboard\Foundations\Domain\Articles\Repositories\ArticleRepositoryInterface;
+use BasicDashboard\Foundations\Domain\Categories\Repositories\CategoryRepositoryInterface;
 
 /**
  *
@@ -55,30 +57,29 @@ class ArticleService extends BaseController
 
     public function create(): View
     {
-        return view(self::VIEW . '.create');
+        $viewCategories = Category::all(['id','name']);
+        $viewSubcategories = Subcategory::all(['id','name']);
+        return view(self::VIEW . '.create',compact('viewCategories','viewSubcategories'));
     }
 
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
-    public function store($request)
+    public function store($request) :RedirectResponse
     {
         try {
             $this->articleRepository->beginTransaction();
-            $link_count           = $this->storeArticleJob->getLinks($request);
-            $telegramNotification = $this->storeArticleJob->checkTelegramNotification($request);
-            $request              = Arr::except($request, ['is_sent_to_telegram', 'link_count']);
             $model                = $this->articleRepository->insert($request);
             $path                 = "articles" . '/' . $model['id'];
-            $generatedUrl         = $this->generatePresignedUrl($link_count, $path);
-            $paths                = array_column($generatedUrl, 'path'); // to store in db
-            $urls                 = array_column($generatedUrl, 'url');  //to return to frontend
+            $paths = [];
+            if($request['link']){
+                $paths = uploadFilesToDigitalOcean($request['link'], $path);
+            }
             $thumbnailPath        = isset($request['thumbnail']) ? uploadImageToDigitalOcean($request['thumbnail'], $path) : null;
             $this->storeArticleJob->modelUpdater($model, $paths, $thumbnailPath);
-            $telegramNotification ? $this->sendTelegramNotification(customEncoder($model->id)) : '';
             $this->articleRepository->commit();
-            return response()->json($this->storeArticleJob->prepareReturnData(self::LANG_PATH, $urls, $model['id']));
+            return $this->redirectRoute(self::ROUTE. ".index", __(self::LANG_PATH. '_created'));
         } catch (Exception $e) {
-            return $this->sendAjaxError($e->getMessage());
+            return $this->redirectBackWithError($this->articleRepository, $e);
         }
     }
 

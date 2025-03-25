@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
  * https://naybala.netlify.app/
  *
  */
-#[ObservedBy([AuditObserver::class])]
 class Role extends Model
 {
     use HasFactory, SoftDeletes;

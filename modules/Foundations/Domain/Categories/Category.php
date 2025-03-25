@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  */
 //if you want to audit this model uncomment below code and import
-#[ObservedBy([AuditObserver::class])]
 class Category extends Model
 {
     use HasFactory, SoftDeletes;

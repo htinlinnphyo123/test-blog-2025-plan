@@ -19,7 +19,6 @@ use BasicDashboard\Foundations\Domain\categories\Category;
  *
  */
 //if you want to audit this model uncomment below code and import
-#[ObservedBy([AuditObserver::class])]
 class Subcategory extends Model
 {
     use HasFactory, SoftDeletes;

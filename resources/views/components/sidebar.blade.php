@@ -55,22 +55,10 @@
                 </li>
                 {{-- End Dashboard --}}
                 <x-sidebar.list title="sidebar.user" model="users" icon="fa-solid fa-user" />
-                <x-sidebar.multi_menu dropdownName="sidebar_category" menuName="sidebar.catagory_menu" :menuLists="['categories','subcategories']">
-                    <x-sidebar.list title="sidebar.category" model="categories" icon="fa-solid fa-list" />
-                    <x-sidebar.list title="sidebar.subcategory" model="subcategories" icon="fa-solid fa-layer-group" />
-                </x-sidebar.multi_menu>
+                <x-sidebar.list title="sidebar.category" model="categories" icon="fa-solid fa-list" />
+                <x-sidebar.list title="sidebar.subcategory" model="subcategories" icon="fa-solid fa-layer-group" />
                 <x-sidebar.list title="sidebar.article" model="articles" icon="fa-solid fa-list-alt" />
                 <x-sidebar.list title="sidebar.page" model="pages" icon="fa-solid fa-scroll" />
-                <x-sidebar.list title="sidebar.sponsorAd" model="sponsorAds" icon="fa-solid fa-ad" />
-                <x-sidebar.list title="sidebar.notification" model="notifications" icon="fa-solid fa-bell"/>
-                <x-sidebar.multi_menu dropdownName="sidebar_setting" menuName="sidebar.setting" :menuLists="['audits','roles','countries','address']"
-                menuIcon="fa-solid fa-gear">
-                    <x-sidebar.list title="sidebar.role" model="roles" icon="fa-brands fa-r-project" />
-                    <x-sidebar.list title="sidebar.audit" model="audits" icon="fa-brands fa-audible" />
-                    <!-- <x-sidebar.list title="sidebar.setting" model="settings" icon="fa-solid fa-gear" /> -->
-                    <x-sidebar.list title="sidebar.country" model="countries" icon="fa-solid fa-globe" />
-                    <x-sidebar.list title="sidebar.address" model="addresses" icon="fa-solid fa-location-dot" />
-                </x-sidebar.multi_menu>
             </ul>
         </div>
         <small class="text-xs text-gray-800/50 dark:text-white font-bold ps-2 mt-4 lg:mt-10 menu-title block z-0.5">

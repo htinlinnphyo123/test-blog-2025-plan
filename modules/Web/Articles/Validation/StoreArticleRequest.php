@@ -18,6 +18,7 @@ class StoreArticleRequest extends FormRequest
 {
     public function authorize(): bool
     {
+        // dd($this->all());
         return true;
     }
 
@@ -31,22 +32,11 @@ class StoreArticleRequest extends FormRequest
         return [
             "title"               => "required|max:255",
             "category_id"         => "required",
-            "is_sent_to_telegram" => "",
         ];
     }
     protected function passedValidation(): void
     {
-        if ($this->date != null) {
-            $this->merge([
-                'date' => transform($this->date, fn() => Carbon::createFromFormat('m/d/Y', $this->date)->format('Y-m-d'))
-                . ' ' . $this->time . ':00',
-            ]);
-        }
-        $this->merge([
-            'is_banner'     => 1,
-            'is_highlighed' => 1,
-        ]);
-        $this->offsetUnset('time');
+
     }
 
 }

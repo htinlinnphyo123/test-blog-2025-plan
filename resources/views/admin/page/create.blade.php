@@ -30,45 +30,10 @@
                 <x-file.simple_img_upload title="page.thumbnail" name="thumbnail" id="thumbnail" photoId="thumbnail_pic" />
                 {{-- Thumbnail --}}
 
-                {{-- Users --}}
-                <x-form.single_select title="page.written" name="written_by" id="written_by" >
-                    @foreach ($viewUsers as $user)
-                        <option value="{{ $user['id'] }}">
-                            {{ $user['name'] }}
-                        </option>
-                    @endforeach
-                </x-form.single_select>
-                {{-- Users--}}
             </x-form.grid>
-
-            {{-- Date Published --}}
-            @if(permissionCheck(['publish pages']))
-                <x-form.fieldset title="page.fieldset_published">
-                    <x-form.checkbox title="page.is_published" name="is_published" id="is_published"/>
-                    <p id="published_error" class="text-sm text-red-700 hidden">
-                        {{__('page.page_publish_date_validation');}}
-                    </p>
-                    <x-form.date_picker title="page.date" name="date" id="date" />
-                    <x-form.checkbox title="page.is_highlighed" name="is_highlighed" id="is_highlighed"/>
-                    <x-form.checkbox title="page.is_banner" name="is_banner" id="is_banner"/>
-                </x-form.fieldset>
-            @else
-                <input type="hidden" id="date" value="" />
-            @endif
-            {{-- Date Publishede --}}
 
             <x-form.quill_editor title="page.description" name="description" id="description" helperText="description"/>
             <x-form.quill_editor title="page.description_other" name="description_other" id="description_other" helperText="description" />
-
-            {{-- Type --}}
-            <x-form.simple_select title="page.type" name="type" id="type" :required="true">
-                @foreach (App\Enums\PageType::cases() as $type)
-                    <option value="{{ $type->value }}">
-                        {{ $type->name }}
-                    </option>
-                @endforeach
-            </x-form.simple_select>
-            {{-- Type --}}
 
             <x-file.simple_file title="page.link" name="link" id="link" />
             <p id="indicator" class="text-sm"></p>

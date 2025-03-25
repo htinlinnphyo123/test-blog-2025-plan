@@ -54,7 +54,6 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function insert(array $params, $useModel = false): mixed
     {
-        $params['created_by'] = Auth::id();
         $query = $this->connection($useModel)->create($params);
         if (!$query) {
             throw new QueryException("Inserting a row was failed.", "sql", [], $query);
@@ -125,7 +124,7 @@ class BaseRepository implements BaseRepositoryInterface
         $id = customDecoder($id);
         $model = $this->connection(true)
             ->where('id',$id)
-            ->first($id);
+            ->first();
         return $model;
     }
 
@@ -147,7 +146,6 @@ class BaseRepository implements BaseRepositoryInterface
     public function update(array $params, $id): mixed
     {
         $id = customDecoder($id);
-        $params['updated_by'] = Auth::id();
         $model = $this->connection(true)->find($id);
         $query = $model->update($params);
         if (!$query) {

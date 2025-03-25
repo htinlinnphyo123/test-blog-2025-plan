@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
  *
  */
 //if you want to audit this model uncomment below code and import
-#[ObservedBy([AuditObserver::class])]
 class Setting extends Model
 {
     use HasFactory, SoftDeletes;

@@ -4,7 +4,6 @@
             @csrf
             <x-form.grid>
                 <x-form.input_group title="category.categoty_name" name="name" id="name" :required="true" placeholder="category_name"/>
-                <x-form.input_group title="category.category_name_other" name="name_other" id="name_other" :required="true" placeholder="category_name_other"/>
                 <x-form.input_group title="category.category_description" name="description" id="description" placeholder="category_description" />
                 <x-form.input_group title="category.category_description_other" name="description_other" id="description_other" placeholder="category_description_other" />
             </x-form.grid>

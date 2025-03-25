@@ -19,23 +19,10 @@ class UserSeeder extends Seeder
         //     message: 'Inserting users to database table...',
         //     callback: fn() => DB::table('users')->insert($this->prepareData())
         // );
-        $data = $this->prepareData();
-        DB::table('users')->insert($data);
-    }
-
-    private function prepareData()
-    {
-        $insertData = [];
-        foreach (range(1, 20) as $a) {
-            $insertData[] = [
-                'name' => 'NayBaLa' . $a,
-                'email' => 'superadmin@gmail' . $a . '.com',
-                'password' => Hash::make('1111'),
-                'country_id' => rand(1, 200),
-                'created_by' => 1,
-                'status' => 1,
-            ];
-        };
-        return $insertData;
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('1111'),
+        ]);
     }
 }
