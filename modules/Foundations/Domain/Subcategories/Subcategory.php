@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use BasicDashboard\Foundations\Domain\categories\Category;
+use BasicDashboard\Foundations\Domain\Categories\Category;
 
 /**
  *

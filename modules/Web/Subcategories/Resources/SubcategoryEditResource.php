@@ -12,9 +12,7 @@ class SubcategoryEditResource extends JsonResource
         return[
             "id" => customEncoder($this->id),
             "name" => $this->name,
-            "name_other" => $this->name_other,
             "description" => $this->description,
-            "description_other" => $this->description_other,
             "category_id" => $this->category_id,
         ];
     }

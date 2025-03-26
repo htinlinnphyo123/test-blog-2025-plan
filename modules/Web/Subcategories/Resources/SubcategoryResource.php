@@ -21,9 +21,7 @@ class SubcategoryResource extends JsonResource
          return [
             "id" => customEncoder($this->id),
             "name" => $this->name,
-            "name_other" => $this->name_other,
             "description" => $this->description,
-            "description_other" => $this->description_other,
             "category" => $this->category->name,
         ];
     }

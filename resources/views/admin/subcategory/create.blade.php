@@ -13,10 +13,7 @@
             {{-- Category single Select --}}
             <x-form.grid>
                 <x-form.input_group title="subcategory.subcategory_name" name="name" id="name" :required="true" placeholder="subcategory_name"/>
-                <x-form.input_group title="subcategory.subcategory_name_other" name="name_other" id="name_other" :required="true" placeholder="subcategory_name_other" />
                 <x-form.input_group title="subcategory.subcategory_description" name="description" id="description" placeholder="subcategory_description"/>
-                <x-form.input_group title="subcategory.subcategory_description_other" name="description_other"
-                    id="description_other" placeholder="subcategory_description_other" />                
             </x-form.grid>
             <x-form.submit :operate="__('messages.save')" :cancel="__('messages.cancel')" url="subcategories.index" />
         </form>

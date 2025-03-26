@@ -6,15 +6,13 @@
                 <x-common.create_button route="subcategories.create" permission="create subcategories" />
             </div>
             <x-table.wrapper>
-                <x-table.header :fields="['category_name', 'subcategory_name', 'subcategory_name_other', 'description', 'subcategory_description_other']" />
+                <x-table.header :fields="['category_name', 'subcategory_name', 'description']" />
                 <x-table.body :data="$data">
                     @foreach ($data['data'] as $record)
                         <x-table.body_row>
                             <x-table.body_column :field="$record['category']" limit="20"/>
                             <x-table.body_column :field="$record['name']" limit="20" />
-                            <x-table.body_column :field="$record['name_other']" limit="20"/>
                             <x-table.body_column :field="$record['description']" limit="20"/>
-                            <x-table.body_column :field="$record['description_other']" limit="20"/>                             
                             <x-table.action :id="$record['id']" field="subcategories" />
                         </x-table.body_row>
                     @endforeach

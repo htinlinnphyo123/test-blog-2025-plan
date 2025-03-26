@@ -25,7 +25,6 @@ class StoreSubcategoryRequest extends FormRequest
     {
         return [
             "name" => "max:255|required",
-            "name_other" => "max:255|required",
             "category_id" => "required",
         ];
     }

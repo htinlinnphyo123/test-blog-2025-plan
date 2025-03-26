@@ -2,6 +2,7 @@
 
 namespace BasicDashboard\Web\Subcategories\Services;
 
+use BasicDashboard\Foundations\Domain\Categories\Category;
 use BasicDashboard\Foundations\Domain\Subcategories\Repositories\SubcategoryRepositoryInterface;
 use BasicDashboard\Web\Common\BaseController;
 use BasicDashboard\Web\Subcategories\Resources\SubcategoryEditResource;
@@ -44,7 +45,8 @@ class SubcategoryService extends BaseController
 
     public function create(): View
     {
-        return view(self::VIEW . '.create');
+        $viewCategories = Category::all(['id','name']);
+        return view(self::VIEW . '.create',compact('viewCategoriess'));
     }
 
     ///////////////////////////This is Method Divider///////////////////////////////////////

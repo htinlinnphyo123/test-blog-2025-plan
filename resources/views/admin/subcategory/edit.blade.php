@@ -5,13 +5,11 @@
             @method('PUT')
             <x-form.grid>
                 <x-form.input_group title="subcategory.subcategory_name" name="name" id="name" :value="$data['name']" :required="true" placeholder="subcategory_name"/>
-                <x-form.input_group title="subcategory.subcategory_name_other" name="name_other" :value="$data['name_other']" :required="true" placeholder="subcategory_name_other"/>
                 <x-form.input_group title="subcategory.subcategory_description" name="description" :value="$data['description']" placeholder="subcategory_description" />
-                <x-form.input_group title="subcategory.subcategory_description_other" name="description_other" :value="$data['description_other']" placeholder="subcategory_description_other" />
                
                 {{-- Category Single Select --}}
                 <x-form.single_select title="subcategory.category" name="category_id">
-                    @foreach ($viewCategories as $c)
+                    @foreach (BasicDashboard\Foundations\Domain\Categories\Category::all(['id','name']) as $c)
                         <option value="{{$c['id']}}" @if ($c['id'] == $data['category_id']) selected @endif>
                             {{ $c['name'] }}
                         </option>    

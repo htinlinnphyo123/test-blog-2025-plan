@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "bref/bref": "^2.4",
+        "bref/laravel-bridge": "^2.5",
         "davion153808/mini-crud-generator": "dev-main",
         "guzzlehttp/guzzle": "^7.2",
         "ladumor/one-signal": "^1.0",
