@@ -66,7 +66,7 @@ class ArticleController extends BaseController
 
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
-    public function update(UpdateArticleRequest $request, string $id,UpdateArticleJob $updateArticleJob): JsonResponse
+    public function update(UpdateArticleRequest $request, string $id,UpdateArticleJob $updateArticleJob): RedirectResponse
     {
         return $this->articleService->update($request->all(), $id,$updateArticleJob);
     }

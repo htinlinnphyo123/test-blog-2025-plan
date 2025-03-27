@@ -165,8 +165,7 @@ class BaseRepository implements BaseRepositoryInterface
     {
         $id = customDecoder($id);
         $this->connection(true)
-            ->where('id', $id)
-            ->update(['deleted_by' => Auth::user()->id]);
+            ->where('id', $id);
         $query = $this->connection(true)->destroy($id);
         if (!$query) {
             throw new QueryException("Inserting a row was failed.", "sql", [], $query);

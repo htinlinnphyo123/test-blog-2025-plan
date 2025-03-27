@@ -26,9 +26,6 @@ class GetArticlesRequest extends FormRequest
         return [
             'category_id' => '',
             'subcategory_id' => '',
-            'is_banner' => '',
-            'is_highlighed' => '',
-            'type' => ''
         ];
     }
 

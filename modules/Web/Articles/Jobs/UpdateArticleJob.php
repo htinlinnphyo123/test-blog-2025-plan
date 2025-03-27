@@ -15,8 +15,10 @@ class UpdateArticleJob
      */
     public function typeChangedAndAllLinkDeleted($modelLinks): array
     {
-        foreach($modelLinks as $link){
-            Storage::disk($this->disk)->delete($link);
+        if($modelLinks){
+            foreach($modelLinks as $link){
+                Storage::disk($this->disk)->delete($link);
+            }
         }
         return [];
     }

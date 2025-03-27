@@ -21,7 +21,6 @@ class BaseSpaController extends Controller
     {
         $response = [
             'code' => 200,
-            'status' => "success",
             'message' => $message,
         ];
         if ($data) {

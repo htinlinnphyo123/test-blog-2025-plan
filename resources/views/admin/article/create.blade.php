@@ -24,9 +24,13 @@
                 </x-form.simple_select>
                 {{-- Category --}}
 
-                {{-- SubCategory --}}
-                <input type="hidden" id="subcategory_lists" value="{{ $viewSubcategories }}" />
-                <x-form.simple_select title="article.subcategory" name="subcategory_id" id="subcategory_id" />
+                <x-form.simple_select title="article.subcategory" name="subcategory_id" id="subcategory_id">
+                    @foreach ($viewSubcategories as $c)
+                        <option value="{{ $c['id'] }}">
+                            {{ $c['name'] }}
+                        </option>
+                    @endforeach
+                </x-form.simple_select>
                 {{-- SubCategory --}}
 
                 {{-- Thumbnail --}}

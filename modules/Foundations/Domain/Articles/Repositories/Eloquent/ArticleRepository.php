@@ -65,7 +65,7 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     public function getArticleList($params): LengthAwarePaginator
     {
         return $this->filterArticle($params)
-            ->orderByRaw('CASE WHEN created_at IS NULL THEN updated_at ELSE created_at END DESC')
+            ->orderBy('updated_at', 'desc')
             ->orderBy('id', 'desc')
             ->paginate(request()->paginate ?? config('numbers.paginate'));
     }
@@ -73,38 +73,17 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     //Mobile Sections
     public function getArticles(array $params): LengthAwarePaginator
     {
-        $emptyValue = null;
+        $categoryId = $params['category_id'] ?? false;
+        $subcategoryId = $params['subcategory_id'] ?? false;
         return $this->connection(true)
-            ->with(['category', 'subcategory', 'createdBy', 'writtenBy'])
-            ->when($params['category_id'] != $emptyValue, function ($query) use ($params) {
-                $categoryId = customDecoder($params['category_id']);
-                if ($categoryId != 1) {
-                    return $query->where('category_id', $categoryId);
-                }
+            ->with(['category', 'subcategory'])
+            ->when($categoryId ?? false, function ($query) use ($categoryId) {
+                return $query->where('category_id', $categoryId);
             })
-            ->when($params['subcategory_id'] != $emptyValue, function ($query) use ($params) {
-                return $query->where('subcategory_id', customDecoder($params['subcategory_id']));
+            ->when($subcategoryId ?? false, function ($query) use ($subcategoryId) {
+                return $query->where('subcategory_id', customDecoder($subcategoryId));
             })
-            ->when($params['is_banner'] === '1', function ($query) use ($params) {
-                return $query->where('is_banner', true);
-            })
-            ->when($params['is_banner'] === '0', function ($query) use ($params) {
-                return $query->where('is_banner', '!=', true);
-            })
-            ->when($params['is_highlighed'] === '1', function ($query) use ($params) {
-                return $query->where('is_highlighed', true);
-            })
-            ->when(isset($params['type']), function ($query) use ($params) {
-                $type = $params['type'];
-                if ($type == 'default_photo') {
-                    return $query->whereIn('type', ['photo', 'default']);
-                } else {
-                    return $query->where('type', $params['type']);
-                }
-            })
-        // ->where('date', "<=", Carbon::today())
             ->where('is_published', true)
-            ->orderByRaw('CASE WHEN created_at IS NULL THEN updated_at ELSE created_at END DESC')
             ->orderBy('id', 'desc')
             ->paginate(request()->paginate ?? config('numbers.paginate'));
     }
@@ -190,13 +169,13 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
             ->get();
     }
 
-    public function getRelatedArticles(array $data, int $limit = 3): Collection
+    public function getRelatedArticles(string $id,string $categoryId, int $limit = 3): Collection
     {
         return $this->connection(true)
             ->where('is_published', 1)
-            ->where('id', "!=", $data['id'])
+            ->where('id', "!=", $id)
             ->orderByRaw('CASE WHEN created_at IS NULL THEN updated_at ELSE created_at END DESC')
-            ->where('subcategory_id', customDecoder($data['subcategory_id']))
+            ->where('category_id', $categoryId)
             ->orderByRaw('RAND()')->take($limit)->get();
 
     }

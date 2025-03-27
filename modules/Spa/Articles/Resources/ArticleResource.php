@@ -20,29 +20,16 @@ class ArticleResource extends JsonResource
     public function toArray($request):array
     {
         $this['thumbnail'] ??= '/Default/default_article_pic.jpg';
-        $checkMedia = $this->link!=[] && count($this->link)>0; 
-        $banner_media = $checkMedia ? retrievePublicFile($this->link[0]) : null;
         return [
             "id" => $this->id,
             "title" => $this->title,
-            "title_other" => $this->title_other,
             "description" => $this->description == '<p><br></p>' ? '' : $this->description,
-            "description_other" => $this->description_other == '<p><br></p>' ? '' : $this->description_other,
             "type" => $this->type,
-            "category_id" => $this->category ? customEncoder($this->category->id) : '',
-            "subcategory_id" => $this->subcategory->id ? customEncoder($this->subcategory->id) : '',
+            "category_id" => $this->category_id,
             "category_name" => $this->category?->name,
-            "subcategory_name" => $this->subcategory?->name,
             "category_name_other" => $this->category?->name_other,
-            "subcategory_name_other" => $this->subcategory?->name_other,
-            "written_by" => $this->written_by != null ? $this->writtenBy->name : "Anonymous",
-            "site_url" =>$this->site_url,
-            "tags"=>$this->tags ? explode(',',$this->tags) : null,
-            "total_view_count"=>$this->total_view_count,
-            "date" => $this->date ? Carbon::parse($this->date)->diffForHumans() : null,
             "thumbnail" => retrievePublicFile($this->thumbnail),
             "link" => retrievePublicFiles($this->link),
-            'banner_media' => $banner_media
         ];
     }
 }

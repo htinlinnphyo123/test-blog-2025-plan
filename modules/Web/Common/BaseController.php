@@ -106,7 +106,7 @@ class BaseController extends Controller
 
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
-    public function generatePresignedUrl($count = 1, $filePath): array
+    public function generatePresignedUrl($count = 1, $filePath='default'): array
     {
         $links = [];
 

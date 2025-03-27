@@ -5,32 +5,6 @@ import { data } from "jquery";
 
 $(document).ready(function () {
   //CATEGORY
-  //Choosing category will automatically change for subcategory lists
-  $("#category_id").change(function () {
-    // console.log($(this).val())
-    $("#subcategory_id").empty();
-    var category_id = $(this).val();
-    if (category_id == "") {
-      $("#subcategory_id").append('<option value="">Choose</option>');
-    } else {
-      var getSubcategoryList = $("#subcategory_lists").val(); //string from input value
-      var arrSubcategoryList = JSON.parse(getSubcategoryList); //change to array
-      var filterSubcategory = arrSubcategoryList.filter(
-        (sub) => sub.category_id == category_id
-      ); //get filter array that belong to chosen category
-      if (filterSubcategory.length > 1) {
-        $("#subcategory_id").append('<option value="">Choose</option>');
-        filterSubcategory.forEach((sub) => {
-          $("#subcategory_id").append(`
-                        <option value="${sub.id}">${sub.name}</option>
-                    `);
-        });
-      } else {
-        $("#subcategory_id").append('<option value="">Choose</option>');
-      }
-    }
-  });
-  //CATEGORY
 
   //ARTICLE TYPE AND FILE INPUT
   const fileInput = $("#link");

@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         //     \Log::info($query->sql, ['bindings' => $query->bindings, 'time' => $query->time]);
 
 
-        Storage::macro('generatePresignedUrls', function ($count = 1, $filePath) {
+        Storage::macro('generatePresignedUrls', function ($count = 1, $filePath='/default') {
             $links = [];
 
             for ($i = 0; $i < $count; $i++) {

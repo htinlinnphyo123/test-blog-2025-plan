@@ -8,7 +8,6 @@ use BasicDashboard\Foundations\Domain\SponsorAds\Repositories\SponsorAdRepositor
 use BasicDashboard\Spa\Articles\Resources\ArticleResource;
 use BasicDashboard\Spa\Articles\Resources\HomeArticleResource;
 use BasicDashboard\Spa\Common\BaseSpaController;
-use BasicDashboard\Spa\SponsorAds\Resources\SponsorAdResource;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -39,7 +38,7 @@ class ArticleService extends BaseSpaController
     public function index(array $request): JsonResponse
     {
         $data = $this->articleRepositoryInterface->getArticles(params: $request);
-        $data = ArticleResource::collection(resource: $data)->response()->getData(assoc: true);
+        $data = HomeArticleResource::collection(resource: $data)->response()->getData(assoc: true);
         return $this->sendResponse(message: "Index success", data: $data);
     }
 
@@ -47,10 +46,7 @@ class ArticleService extends BaseSpaController
 
     public function show(string $id): JsonResponse
     {
-        if (preg_match('/[a-zA-Z]/', $id)) {
-            $id = customDecoder($id);
-        }
-        $article         = $this->articleRepositoryInterface->getModelWithoutEncodedId(id: $id);
+        $article = $this->articleRepositoryInterface->getModelWithoutEncodedId(id: $id);
         if(!$article){
             return response()->json([
                 'data' => 'No article with this ID',
@@ -59,14 +55,11 @@ class ArticleService extends BaseSpaController
         }
         $article         = new ArticleResource(resource: $article);
         $article         = $article->response()->getData(assoc: true)['data'];
-        $relatedArticles = $this->articleRepositoryInterface->getRelatedArticles(data: $article, limit: 5);
+        $relatedArticles = $this->articleRepositoryInterface->getRelatedArticles($article['id'],$article['category_id'], limit: 5);
         $relatedArticles = HomeArticleResource::collection(resource: $relatedArticles)->response()->getData(assoc: true);
-        $sponsorAds      = $this->sponsorAdRepositoryInterface->getSponsorAdsBySize(size: 'Square');
-        $sponsorAds      = SponsorAdResource::collection(resource: $sponsorAds)->response()->getData(assoc: true);
         $data            = [
             'article'          => $article,
             'related_articles' => $relatedArticles['data'],
-            'sponsor_ads'      => $sponsorAds['data'],
 
         ];
         return $this->sendResponse(message: 'Show success', data: $data);
@@ -100,11 +93,8 @@ class ArticleService extends BaseSpaController
             $homeArticles      = $this->articleRepositoryInterface->getHomeData($this->categoryRepositoryInterface->getCategoryListForHome());
             $popUpNotification = $this->notificationRepositoryInterface->getPopUpNotification();
             $flashNews         = HomeArticleResource::collection($flashNews)->response()->getData(true);
-            $topSponsorAds     = SponsorAdResource::collection($topSponsorAds)->response()->getData(true);
             $bannerNews        = HomeArticleResource::collection($bannerNews)->response()->getData(true);
             $topLatestArticles = HomeArticleResource::collection($topLatestArticles)->response()->getData(true);
-            $sponsorAds        = SponsorAdResource::collection($sponsorAds)->response()->getData(true);
-            $footerSponsorAds  = SponsorAdResource::collection($footerSponsorAds)->response()->getData(true);
             $data              = [
                 'flash_news'         => $flashNews['data'],
                 'top_sponsor_ads'    => $topSponsorAds['data'],
@@ -120,12 +110,5 @@ class ArticleService extends BaseSpaController
         } catch (Exception $e) {
             return $this->sendError($e->getMessage());
         }
-    }
-
-    public function homeCategory(array $request)
-    {
-        $data = $this->articleRepositoryInterface->homeCategory($request);
-        $data = HomeArticleResource::collection($data)->response()->getData(true);
-        return $this->sendResponse("Home Articles Only Index success", $data);
     }
 }

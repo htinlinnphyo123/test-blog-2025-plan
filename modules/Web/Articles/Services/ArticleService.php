@@ -68,10 +68,11 @@ class ArticleService extends BaseController
     {
         try {
             $this->articleRepository->beginTransaction();
+            $request['is_published'] = 1;
             $model                = $this->articleRepository->insert($request);
             $path                 = "articles" . '/' . $model['id'];
             $paths = [];
-            if($request['link']){
+            if($request['link'] ?? false){
                 $paths = uploadFilesToDigitalOcean($request['link'], $path);
             }
             $thumbnailPath        = isset($request['thumbnail']) ? uploadImageToDigitalOcean($request['thumbnail'], $path) : null;
@@ -105,49 +106,37 @@ class ArticleService extends BaseController
 
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
-    public function update($request, string $id, UpdateArticleJob $updateJob): JsonResponse
+    public function update($request, string $id, UpdateArticleJob $updateJob): RedirectResponse
     {
         try {
-            //get link count to generate presigned url
-            $linkCount         = $request['link_count'];
-            $deletedMediaArray = json_decode($request['deleteArray']);
-            unset($request['link_count']);
-            unset($request['deleteArray']);
-
             $model = $this->articleRepository->show($id);
 
-            if ($request['type'] !== $model->type) {
+            if ($request['type'] !== $model->type ?? $model->link) {
                 $model->link = $updateJob->typeChangedAndAllLinkDeleted($model->link);
-            } else if (count($deletedMediaArray) > 0) {
-                //If some links are deleted by user, then remove from db and digitalocean
-                $model->link = $updateJob->typeNotChangeAndSomeLinkDeleted($model->link, $deletedMediaArray);
             }
-
             $this->articleRepository->beginTransaction();
             $this->articleRepository->update($request, $id);
-            //for new model
+            
             $path = "articles" . '/' . $model->id;
+            $paths = [];
 
-            $generateLink = $updateJob->newLinksAddAndGeneratePresignedUrlAndPath($linkCount, $path, $model->link);
+            if($request['link'] ?? false){
+                $paths = uploadFilesToDigitalOcean($request['link'], $path);
+            }
 
             $thumbnailPath = $updateJob->updateThumbnail($request, $model->thumbnail, $path);
 
+            // Update model with merged links and new thumbnail
             $model->update([
-                'link'      => $generateLink['dbPath'],
+                'link' => array_merge($model->link ?? [], $paths ?? []),
                 'thumbnail' => $thumbnailPath,
             ]);
 
             $this->articleRepository->commit();
-
-            return response()->json([
-                'message'      => __(self::LANG_PATH . '_created'),
-                'responseType' => 'success',
-                'status'       => 200,
-                'data'         => $generateLink['frontendUrl'],
-                'id'           => customEncoder($model['id']),
-            ]);
+            return $this->redirectRoute(self::ROUTE. ".index", __(self::LANG_PATH. '_created'));            
         } catch (Exception $e) {
-            return $this->sendAjaxError($e->getMessage());
+            \Log::info($e);
+            return $this->redirectBackWithError($this->articleRepository, $e);
         }
     }
 

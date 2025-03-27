@@ -24,17 +24,10 @@ class HomeArticleResource extends JsonResource
         return [
             "id" => $this->id,
             "title" => $this->title,
-            "title_other" => $this->title_other,
             "thumbnail" => retrievePublicFile($this->thumbnail),
-            "type" => $this->type,
-            "category_id" => $this->category ? customEncoder($this->category->id) : '',
-            "subcategory_id" => $this->subcategory->id ? customEncoder($this->subcategory->id) : '',
             "category_name" => $this->category?->name,
+            "date" => $this->created_at->diffForHumans(),
             "subcategory_name" => $this->subcategory?->name,
-            "category_name_other" => $this->category?->name_other,
-            "subcategory_name_other" => $this->subcategory?->name_other,
-            "date" => $this->date ? Carbon::parse($this->date)->diffForHumans() : null,
-            "written_by" => $this->written_by != null ? $this->writtenBy->name : "Anonymous",
         ];
     }
 }

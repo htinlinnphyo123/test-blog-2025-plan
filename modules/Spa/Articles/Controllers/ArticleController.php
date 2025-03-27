@@ -29,7 +29,7 @@ class ArticleController extends BaseSpaController
 
     public function index(GetArticlesRequest $request): JsonResponse
     {
-        return $this->articleService->index($request->all());
+        return $this->articleService->index($request->validated());
     }
 
     ///////////////////////////This is Method Divider///////////////////////////////////////
@@ -49,10 +49,5 @@ class ArticleController extends BaseSpaController
     public function homeIndex(): JsonResponse
     {
         return $this->articleService->homeIndex();
-    }
-
-    public function homeCategory(GetArticlesRequest $request): JsonResponse
-    {
-        return $this->articleService->homeCategory($request->validated());
     }
 }

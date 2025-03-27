@@ -12,6 +12,7 @@
         "bref/bref": "^2.4",
         "bref/laravel-bridge": "^2.5",
         "davion153808/mini-crud-generator": "dev-main",
+        "dedoc/scramble": "^0.12.16",
         "guzzlehttp/guzzle": "^7.2",
         "ladumor/one-signal": "^1.0",
         "laravel-notification-channels/telegram": "^5.0",
