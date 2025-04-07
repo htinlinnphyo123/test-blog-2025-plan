@@ -26,8 +26,8 @@ class ArticleResource extends JsonResource
             "description" => $this->description == '<p><br></p>' ? '' : $this->description,
             "type" => $this->type,
             "category_id" => $this->category_id,
+            "date" => $this->created_at->diffForHumans(),
             "category_name" => $this->category?->name,
-            "category_name_other" => $this->category?->name_other,
             "thumbnail" => retrievePublicFile($this->thumbnail),
             "link" => retrievePublicFiles($this->link),
         ];

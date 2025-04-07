@@ -74,14 +74,10 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     public function getArticles(array $params): LengthAwarePaginator
     {
         $categoryId = $params['category_id'] ?? false;
-        $subcategoryId = $params['subcategory_id'] ?? false;
         return $this->connection(true)
-            ->with(['category', 'subcategory'])
-            ->when($categoryId ?? false, function ($query) use ($categoryId) {
+            ->with(['category'])
+            ->when($categoryId, function ($query) use ($categoryId) {
                 return $query->where('category_id', $categoryId);
-            })
-            ->when($subcategoryId ?? false, function ($query) use ($subcategoryId) {
-                return $query->where('subcategory_id', customDecoder($subcategoryId));
             })
             ->where('is_published', true)
             ->orderBy('id', 'desc')

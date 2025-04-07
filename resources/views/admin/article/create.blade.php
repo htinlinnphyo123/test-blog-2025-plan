@@ -22,16 +22,7 @@
                         </p>
                     </x-slot:ajaxError>
                 </x-form.simple_select>
-                {{-- Category --}}
-
-                <x-form.simple_select title="article.subcategory" name="subcategory_id" id="subcategory_id">
-                    @foreach ($viewSubcategories as $c)
-                        <option value="{{ $c['id'] }}">
-                            {{ $c['name'] }}
-                        </option>
-                    @endforeach
-                </x-form.simple_select>
-                {{-- SubCategory --}}
+            {{-- Category --}}
 
                 {{-- Thumbnail --}}
                 <x-file.simple_img_upload title="article.thumbnail" name="thumbnail" id="thumbnail"

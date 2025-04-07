@@ -55,7 +55,7 @@ class ArticleService extends BaseSpaController
         }
         $article         = new ArticleResource(resource: $article);
         $article         = $article->response()->getData(assoc: true)['data'];
-        $relatedArticles = $this->articleRepositoryInterface->getRelatedArticles($article['id'],$article['category_id'], limit: 5);
+        $relatedArticles = $this->articleRepositoryInterface->getRelatedArticles($article['id'],$article['category_id'], limit: 3);
         $relatedArticles = HomeArticleResource::collection(resource: $relatedArticles)->response()->getData(assoc: true);
         $data            = [
             'article'          => $article,

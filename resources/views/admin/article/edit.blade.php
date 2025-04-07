@@ -33,16 +33,6 @@
                 </x-form.simple_select>
                 {{-- Category --}}
 
-                {{-- SubCategory --}}
-                <x-form.simple_select title="article.subcategory" name="subcategory_id" id="subcategory_id">
-                    @foreach (BasicDashboard\Foundations\Domain\Subcategories\Subcategory::select(['id','name'])->get() as $c)
-                        <option value="{{ $c['id'] }}" @if ($c['id'] == $data['subcategory']) selected @endif>
-                            {{ $c['name'] }}
-                        </option>
-                    @endforeach
-                </x-form.simple_select>
-                {{-- SubCategory --}}
-
                 {{-- Thumbnail --}}
                 <x-file.simple_img_upload title="article.thumbnail" name="thumbnail" id="thumbnail"
                     photoId="thumbnail_pic" :imageSrc="$data['thumbnail']" />

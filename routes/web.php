@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use BasicDashboard\Web\Auth\Controllers\AuthController;
 use BasicDashboard\Web\Pages\Controllers\PageController;
 use BasicDashboard\Web\Roles\Controllers\RoleController;
@@ -47,7 +48,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('addresses', AddressController::class);
     Route::resource('audits', AuditController::class);
-    Route::resource('roles', RoleController::class);
     Route::resource('settings', SettingController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
@@ -62,11 +62,11 @@ Route::post('upload/image', function (Request $request) {
     $path    = $request->path;
     $file    = $request->file('image');
     $url     = uploadImageToDigitalOcean($file, $path); //get file path that store in digitalocean
-    $fullURL = config('filesystems.disks.digitalocean.endpoint') . '/' . $url;
+    // $fullURL = config('filesystems.disks.digitalocean.endpoint') . '/' . $url;
     return response()->json([
         'data' => 'succeess',
         'code' => 200,
-        'url'  => $fullURL,
+        'url'  => Storage::url($url),
     ]);
 })->name('uploadImage');
 

@@ -54,7 +54,7 @@ if (!function_exists('permissionCheck')) {
 if (!function_exists('uploadImageToDigitalOcean')) {
     function uploadImageToDigitalOcean($file, $directory, $privacy = 'public'): String
     {
-        $uploadMedia = Storage::disk('digitalocean')->putFile($directory, $file, $privacy);
+        $uploadMedia = Storage::disk('public')->putFile($directory, $file, $privacy);
         return $uploadMedia ? $uploadMedia : null;
     }
 }
@@ -64,7 +64,7 @@ if (!function_exists('uploadFilesToDigitalOcean')) {
     {
         $uploadedFiles = [];
         foreach ($files as $file) {
-            $uploadMedia = Storage::disk('digitalocean')->putFile($directory, $file, $privacy);
+            $uploadMedia = Storage::disk('public')->putFile($directory, $file, $privacy);
             if ($uploadMedia) {
                 $uploadedFiles[] = $uploadMedia;
             }
@@ -76,7 +76,7 @@ if (!function_exists('uploadFilesToDigitalOcean')) {
 if (!function_exists('retrievePublicFile')) {
     function retrievePublicFile($path): String
     {
-        return Storage::disk('digitalocean')->url($path);
+        return Storage::disk('public')->url($path);
     }
 }
 
@@ -85,7 +85,7 @@ if (!function_exists('retrievePublicFiles')) {
     {
         $array = $array == null ? [] : $array;
         return array_map(function ($path) {
-            return Storage::disk('digitalocean')->url($path);
+            return Storage::disk('public')->url($path);
         }, $array);
     }
 }

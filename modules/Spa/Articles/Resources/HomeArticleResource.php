@@ -27,7 +27,6 @@ class HomeArticleResource extends JsonResource
             "thumbnail" => retrievePublicFile($this->thumbnail),
             "category_name" => $this->category?->name,
             "date" => $this->created_at->diffForHumans(),
-            "subcategory_name" => $this->subcategory?->name,
         ];
     }
 }

@@ -54,11 +54,11 @@
                     </a>
                 </li>
                 {{-- End Dashboard --}}
-                <x-sidebar.list title="sidebar.user" model="users" icon="fa-solid fa-user" />
+                {{-- <x-sidebar.list title="sidebar.user" model="users" icon="fa-solid fa-user" /> --}}
                 <x-sidebar.list title="sidebar.category" model="categories" icon="fa-solid fa-list" />
-                <x-sidebar.list title="sidebar.subcategory" model="subcategories" icon="fa-solid fa-layer-group" />
+                {{-- <x-sidebar.list title="sidebar.subcategory" model="subcategories" icon="fa-solid fa-layer-group" /> --}}
                 <x-sidebar.list title="sidebar.article" model="articles" icon="fa-solid fa-list-alt" />
-                <x-sidebar.list title="sidebar.page" model="pages" icon="fa-solid fa-scroll" />
+                {{-- <x-sidebar.list title="sidebar.page" model="pages" icon="fa-solid fa-scroll" /> --}}
             </ul>
         </div>
         <small class="text-xs text-gray-800/50 dark:text-white font-bold ps-2 mt-4 lg:mt-10 menu-title block z-0.5">
