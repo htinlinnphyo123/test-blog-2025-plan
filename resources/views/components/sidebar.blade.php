@@ -30,7 +30,7 @@
         id="asideShowHide">
         <div class=" text-gray-500 dark:text-gray-400">
             <div class="activeTitleNav bg-gray-200 dark:bg-inherit">
-                <img src="https://buddha.sgp1.digitaloceanspaces.com/logo/2024-08-30%2015.45.06.jpg"  />
+                {{-- <img src="https://buddha.sgp1.digitaloceanspaces.com/logo/2024-08-30%2015.45.06.jpg"  /> --}}
                 <h1 class="text-black  text-center text-xl dark:text-white" id="titleLong">
                     {{ __('sidebar.main_heading') }}    
                 </h1>

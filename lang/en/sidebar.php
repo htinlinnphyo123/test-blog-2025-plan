@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'main_heading' => "Buddhist News",
-    'main_heading_short' => "B.N...",
+    'main_heading' => "One day",
+    'main_heading_short' => "O.D...",
     'dashboard' => "Dashboard",
     'user' => "User",
     'country' => "Country",

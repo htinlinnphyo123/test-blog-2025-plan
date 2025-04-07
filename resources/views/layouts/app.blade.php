@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- csrf token need for using ajax post method --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Buddhist News</title>
+    <title>One day</title>
     @vite(['resources/css/app.css', 'resources/css/custom.css', 'resources/js/app.js'])
 </head>
 
