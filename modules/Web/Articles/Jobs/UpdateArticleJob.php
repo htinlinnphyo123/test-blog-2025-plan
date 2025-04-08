@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UpdateArticleJob
 {
-    protected $disk = 'digitalocean';
+    protected $disk = 'public';
 
     /**
      * Article type changed and all links deleted by Backend

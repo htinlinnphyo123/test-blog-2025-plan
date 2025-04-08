@@ -2,7 +2,7 @@
 
 return [
     'main_heading' => "One day",
-    'main_heading_short' => "O.D...",
+    'main_heading_short' => "O..D..",
     'dashboard' => "Dashboard",
     'user' => "User",
     'country' => "Country",
