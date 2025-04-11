@@ -9,6 +9,10 @@
                 </x-form.input_group>
                 {{-- Title --}}
 
+                <x-form.input_group title="article.keywords" name="keywords" id="keywords"
+                    placeholder="article_keywords">
+                </x-form.input_group>
+
                 {{-- Category --}}
                 <x-form.simple_select title="article.category" name="category_id" id="category_id" :required="true">
                     @foreach ($viewCategories as $c)

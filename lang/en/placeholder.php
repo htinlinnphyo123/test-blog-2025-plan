@@ -8,6 +8,7 @@ return [
     'placeholder_password' => "Please enter strong password",
     'placeholder_old_password' => "Please enter old password",
     'placeholder_new_password' => "Please enter strong new password",
+    'placeholder_article_keywords' => 'Please enter keywords',
     'placeholder_phone' => "Please enter phone number",
     'placeholder_id_number' => "Please enter NRC number or Passport number",
     'placeholder_father_name' => "Please enter father name",

@@ -7,6 +7,7 @@ return [
     'description_other'               => 'Description in English language',
     'category'                        => 'Choose category for article',
     'category_show'                   => 'Category for article',
+    'keywords'                        => 'Keywords',
     'subcategory'                     => 'Choose subcategory for  article',
     'subcategory_show'                => 'Subcategory for  article',
     'date'                            => 'Choose date to publish article',

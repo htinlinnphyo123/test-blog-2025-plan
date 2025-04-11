@@ -22,6 +22,7 @@ class EditArticleResource extends JsonResource
             "title" => $this->title,
             'description' => $this->description,
             'category' => $this->category_id,
+            'keywords' => $this->keywords,
             'subcategory' => $this->subcategory_id,
             'thumbnail' => retrievePublicFile($this->thumbnail),
             'type' => $this->type,

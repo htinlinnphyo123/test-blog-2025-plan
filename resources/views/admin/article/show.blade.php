@@ -5,6 +5,7 @@
         <x-show.grid :isBackground='true'>
             <!-- <x-show.text_group title="article.id" :data="$data['id']" /> -->
             <x-show.text_group title="article.title" :data="$data['title']" />
+            <x-show.text_group title="article.keywords" :data="$data['keywords']" />
             <x-show.text_group title="article.category_show" :data="$data['category']" />
             <x-show.text_group title="article.subcategory_show" :data="$data['subcategory']" />
             <x-show.thumbnail

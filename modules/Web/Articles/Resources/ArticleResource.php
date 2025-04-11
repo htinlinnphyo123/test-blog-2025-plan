@@ -24,6 +24,7 @@ class ArticleResource extends JsonResource
             "title" => $this->title,
             "type" => $this->type,
             'description' => $this->description,
+            'keywords' => $this->keywords,
             'category' => $this->category->name,
             'link' => $this->link ? retrievePublicFiles($this->link) : [],
             'subcategory' => $this->subcategory->name,
