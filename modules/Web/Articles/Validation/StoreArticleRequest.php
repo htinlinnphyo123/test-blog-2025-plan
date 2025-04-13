@@ -18,7 +18,6 @@ class StoreArticleRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // dd($this->all());
         return true;
     }
 

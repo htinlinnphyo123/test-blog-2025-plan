@@ -33,6 +33,7 @@ class Article extends Model
         'is_published' => 'boolean',
         'is_banner' => 'boolean',
         'is_highlighed' => 'boolean',
+        'show_thumbnail' => 'boolean',
     ];
 
     public function category(): BelongsTo

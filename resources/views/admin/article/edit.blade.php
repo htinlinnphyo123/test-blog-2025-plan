@@ -22,6 +22,11 @@
                 placeholder="article_keywords" :value="$data['keywords']">
                 </x-form.input_group>
 
+                <x-form.single_select title="article.show_thumbnail" name="show_thumbnail">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </x-form.single_select>
+
                 {{-- Category --}}
                 <x-form.simple_select title="article.category" name="category_id" id="category_id" :required="true">
                     @foreach (BasicDashboard\Foundations\Domain\Categories\Category::select(['id','name'])->get() as $c)
