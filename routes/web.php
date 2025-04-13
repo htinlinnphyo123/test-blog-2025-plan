@@ -18,6 +18,7 @@ use BasicDashboard\Web\Categories\Controllers\CategoryController;
 use BasicDashboard\Web\Currencies\Controllers\CurrencyController;
 use BasicDashboard\Web\Dashboard\Controllers\DashboardController;
 use BasicDashboard\Web\SponsorAds\Controllers\SponsorAdController;
+use BasicDashboard\Web\ContactForms\Controllers\ContactFormController;
 use BasicDashboard\Web\Subcategories\Controllers\SubcategoryController;
 use BasicDashboard\Web\Notifications\Controllers\NotificationController;
 
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('articles', ArticleController::class);
+    Route::get('contactforms', [ContactFormController::class, 'index'])->name('contactForm.index');
     Route::resource('pages', PageController::class);
 });
 Route::post('articles/{id}/send-telegram-notification', [ArticleController::class,'sendTelegramNotification'])->name('articles.sendTelegramNotification');

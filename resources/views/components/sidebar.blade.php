@@ -56,6 +56,7 @@
                 {{-- End Dashboard --}}
                 {{-- <x-sidebar.list title="sidebar.user" model="users" icon="fa-solid fa-user" /> --}}
                 <x-sidebar.list title="sidebar.category" model="categories" icon="fa-solid fa-list" />
+                <x-sidebar.list title="sidebar.contact_form" model="contactForm" icon="fa-solid fa-list" />
                 {{-- <x-sidebar.list title="sidebar.subcategory" model="subcategories" icon="fa-solid fa-layer-group" /> --}}
                 <x-sidebar.list title="sidebar.article" model="articles" icon="fa-solid fa-list-alt" />
                 {{-- <x-sidebar.list title="sidebar.page" model="pages" icon="fa-solid fa-scroll" /> --}}

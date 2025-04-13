@@ -20,6 +20,8 @@ use BasicDashboard\Foundations\Domain\Countries\Repositories\CountryRepositoryIn
 use BasicDashboard\Foundations\Domain\Countries\Repositories\Eloquent\CountryRepository;
 use BasicDashboard\Foundations\Domain\Categories\Repositories\CategoryRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Categories\Repositories\Eloquent\CategoryRepository;
+use BasicDashboard\Foundations\Domain\ContactForms\Repositories\ContactFormRepositoryInterface;
+use BasicDashboard\Foundations\Domain\ContactForms\Repositories\Eloquent\ContactFormRepository;
 use BasicDashboard\Foundations\Domain\Currencies\Repositories\CurrencyRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Currencies\Repositories\Eloquent\CurrencyRepository;
 use BasicDashboard\Foundations\Domain\Subcategories\Repositories\Eloquent\SubcategoryRepository;
@@ -53,6 +55,7 @@ class RepositoryBindingProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterface::class,SettingRepository::class);
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
         $this->app->bind(SponsorAdRepositoryInterface::class,SponsorAdRepository::class);
+        $this->app->bind(ContactFormRepositoryInterface::class,ContactFormRepository::class);
         
     }
 
