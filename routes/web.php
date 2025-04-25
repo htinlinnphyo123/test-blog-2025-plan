@@ -1,5 +1,6 @@
 <?php
 
+use BasicDashboard\Web\Sports\Controllers\SportController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('articles', ArticleController::class);
     Route::get('contactforms', [ContactFormController::class, 'index'])->name('contactForm.index');
     Route::resource('pages', PageController::class);
+    Route::resource('sports', SportController::class);
 });
 Route::post('articles/{id}/send-telegram-notification', [ArticleController::class,'sendTelegramNotification'])->name('articles.sendTelegramNotification');
 Route::get('/profile', [UserController::class, 'profile'])->name('userProfile')->middleware('auth');

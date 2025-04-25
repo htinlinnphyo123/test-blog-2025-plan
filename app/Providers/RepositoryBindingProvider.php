@@ -8,8 +8,12 @@ use BasicDashboard\Foundations\Domain\Pages\Repositories\Eloquent\PageRepository
 use BasicDashboard\Foundations\Domain\Pages\Repositories\PageRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Roles\Repositories\Eloquent\RoleRepository;
 use BasicDashboard\Foundations\Domain\Roles\Repositories\RoleRepositoryInterface;
+use BasicDashboard\Foundations\Domain\Users\Repositories\Eloquent\UserRepository;
+use BasicDashboard\Foundations\Domain\Users\Repositories\UserRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Audits\Repositories\AuditRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Audits\Repositories\Eloquent\AuditRepository;
+use BasicDashboard\Foundations\Domain\Sports\Repositories\Eloquent\SportRepository;
+use BasicDashboard\Foundations\Domain\Sports\Repositories\SportRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Articles\Repositories\ArticleRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Articles\Repositories\Eloquent\ArticleRepository;
 use BasicDashboard\Foundations\Domain\Settings\Repositories\Eloquent\SettingRepository;
@@ -20,18 +24,16 @@ use BasicDashboard\Foundations\Domain\Countries\Repositories\CountryRepositoryIn
 use BasicDashboard\Foundations\Domain\Countries\Repositories\Eloquent\CountryRepository;
 use BasicDashboard\Foundations\Domain\Categories\Repositories\CategoryRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Categories\Repositories\Eloquent\CategoryRepository;
-use BasicDashboard\Foundations\Domain\ContactForms\Repositories\ContactFormRepositoryInterface;
-use BasicDashboard\Foundations\Domain\ContactForms\Repositories\Eloquent\ContactFormRepository;
 use BasicDashboard\Foundations\Domain\Currencies\Repositories\CurrencyRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Currencies\Repositories\Eloquent\CurrencyRepository;
+use BasicDashboard\Foundations\Domain\SponsorAds\Repositories\Eloquent\SponsorAdRepository;
+use BasicDashboard\Foundations\Domain\SponsorAds\Repositories\SponsorAdRepositoryInterface;
+use BasicDashboard\Foundations\Domain\ContactForms\Repositories\ContactFormRepositoryInterface;
+use BasicDashboard\Foundations\Domain\ContactForms\Repositories\Eloquent\ContactFormRepository;
 use BasicDashboard\Foundations\Domain\Subcategories\Repositories\Eloquent\SubcategoryRepository;
 use BasicDashboard\Foundations\Domain\Subcategories\Repositories\SubcategoryRepositoryInterface;
 use BasicDashboard\Foundations\Domain\Notifications\Repositories\Eloquent\NotificationRepository;
 use BasicDashboard\Foundations\Domain\Notifications\Repositories\NotificationRepositoryInterface;
-use BasicDashboard\Foundations\Domain\SponsorAds\Repositories\Eloquent\SponsorAdRepository;
-use BasicDashboard\Foundations\Domain\SponsorAds\Repositories\SponsorAdRepositoryInterface;
-use BasicDashboard\Foundations\Domain\Users\Repositories\Eloquent\UserRepository;
-use BasicDashboard\Foundations\Domain\Users\Repositories\UserRepositoryInterface;
 
 class RepositoryBindingProvider extends ServiceProvider
 {
@@ -56,6 +58,7 @@ class RepositoryBindingProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
         $this->app->bind(SponsorAdRepositoryInterface::class,SponsorAdRepository::class);
         $this->app->bind(ContactFormRepositoryInterface::class,ContactFormRepository::class);
+        $this->app->bind(SportRepositoryInterface::class,SportRepository::class);
         
     }
 
