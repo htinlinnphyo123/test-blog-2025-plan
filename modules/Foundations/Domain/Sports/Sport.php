@@ -1,6 +1,8 @@
 <?php
 
 namespace BasicDashboard\Foundations\Domain\Sports;
+
+use App\Enums\SportStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +22,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Sport extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'status' => SportStatus::class,  
+    ];
       //protected $table = 'table_name';
       protected $guarded = [
 

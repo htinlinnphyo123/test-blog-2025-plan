@@ -1,10 +1,11 @@
 <?php
 namespace BasicDashboard\Foundations\Domain\Sports\Repositories;
 
-use BasicDashboard\Foundations\Domain\Base\Repositories\BaseRepositoryInterface;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BasicDashboard\Foundations\Domain\Sports\Sport;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use BasicDashboard\Foundations\Domain\Base\Repositories\BaseRepositoryInterface;
 
 
 /**
@@ -21,4 +22,5 @@ interface SportRepositoryInterface extends BaseRepositoryInterface
 {
     public function filterSport(array $params): Builder | Sport;
     public function getSportList($params): LengthAwarePaginator;
+    public function getSportForSPA($params) : Collection | array | \Illuminate\Database\Eloquent\Collection | \Illuminate\Database\Eloquent\Model | null;
 }

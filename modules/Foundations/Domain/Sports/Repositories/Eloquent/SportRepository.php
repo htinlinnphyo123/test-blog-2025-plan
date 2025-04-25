@@ -2,11 +2,12 @@
 
 namespace BasicDashboard\Foundations\Domain\Sports\Repositories\Eloquent;
 
-use BasicDashboard\Foundations\Domain\Base\Repositories\Eloquent\BaseRepository;
-use BasicDashboard\Foundations\Domain\Sports\Repositories\SportRepositoryInterface;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use BasicDashboard\Foundations\Domain\Sports\Sport;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Pagination\LengthAwarePaginator;
+use BasicDashboard\Foundations\Domain\Base\Repositories\Eloquent\BaseRepository;
+use BasicDashboard\Foundations\Domain\Sports\Repositories\SportRepositoryInterface;
 
 /**
  *
@@ -31,7 +32,26 @@ class SportRepository extends BaseRepository implements SportRepositoryInterface
         if (isset($params['keyword']) && strlen($params['keyword']) > 0) {
             $connection = $connection->where('name', 'LIKE', '%' . $params['keyword'] . '%');
         }
+        $connection = $connection->when(isset($params['status'] ) && $params['status'],function ($query) use($params){
+                        $query->where('status', $params['status']);
+                    })
+                    ->when(isset($params['date'] ) && $params['date'],function ($query) use($params){
+                        $query->whereDate('date', $params['date']);
+                    });
         return $connection;
+    }
+
+    public function showBySlug(string $slug): mixed
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
+
+    public function getSportForSPA($params) : Collection | array | \Illuminate\Database\Eloquent\Collection | \Illuminate\Database\Eloquent\Model
+    {
+        return $this->filterSport($params)
+            ->orderByRaw('CASE WHEN created_at IS NULL THEN updated_at ELSE created_at END DESC')
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function getSportList($params): LengthAwarePaginator

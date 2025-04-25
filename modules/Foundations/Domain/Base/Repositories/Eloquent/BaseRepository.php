@@ -128,7 +128,7 @@ class BaseRepository implements BaseRepositoryInterface
         return $model;
     }
 
-    public function showBySlug($slug) : mixed
+    public function showBySlug(string $slug) : mixed
     {
         return $this->connection(true)
             ->where('slug',$slug)
