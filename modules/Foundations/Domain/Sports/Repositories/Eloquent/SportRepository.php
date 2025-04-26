@@ -49,8 +49,7 @@ class SportRepository extends BaseRepository implements SportRepositoryInterface
     public function getSportForSPA($params) : Collection | array | \Illuminate\Database\Eloquent\Collection | \Illuminate\Database\Eloquent\Model
     {
         return $this->filterSport($params)
-            ->orderByRaw('CASE WHEN created_at IS NULL THEN updated_at ELSE created_at END DESC')
-            ->orderBy('id', 'desc')
+            ->orderBy('time', 'desc')
             ->get();
     }
 

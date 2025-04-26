@@ -5,6 +5,7 @@ namespace BasicDashboard\Spa\Sports\Services;
 use BasicDashboard\Foundations\Domain\Sports\Repositories\SportRepositoryInterface;
 use BasicDashboard\Spa\Common\BaseSpaController;
 use BasicDashboard\Spa\Sports\Resources\SportResource;
+use BasicDashboard\Spa\Sports\Resources\SportShowResource;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -45,7 +46,7 @@ class SportService extends BaseSpaController
             'message' => 'Not Found',
             'code' => 404,
         ], 404);
-        $data= new SportResource($data);
+        $data= new SportShowResource($data);
         $data= $data->response()->getData(true)['data'];
         return $this->sendResponse('Show success',$data);
     }
