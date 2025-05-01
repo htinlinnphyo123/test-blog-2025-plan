@@ -70,6 +70,13 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
             ->paginate(request()->paginate ?? config('numbers.paginate'));
     }
 
+    public function getSiteMapArticle() : Collection
+    {
+        return $this->connection()
+            ->select(['id','title','updated_at','thumbnail'])
+            ->get();
+    }
+
     //Mobile Sections
     public function getArticles(array $params): LengthAwarePaginator
     {

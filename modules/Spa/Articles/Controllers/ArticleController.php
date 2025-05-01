@@ -32,6 +32,11 @@ class ArticleController extends BaseSpaController
         return $this->articleService->index($request->validated());
     }
 
+    public function sitemapFetch() :JsonResponse
+    {
+        return $this->articleService->sitemapFetch();
+    }
+
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
     public function detail(ArticleDetailRequest $request): JsonResponse

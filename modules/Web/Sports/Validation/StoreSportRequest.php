@@ -27,6 +27,7 @@ class StoreSportRequest extends FormRequest
             "name"=>"required",
             "slug"=>"required",
             "image"=>"",
+            "status" => "",
             "description"=>"required",
             "date" => "required",
             "time" => "required",

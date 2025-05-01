@@ -7,6 +7,7 @@ use BasicDashboard\Foundations\Domain\Notifications\Repositories\NotificationRep
 use BasicDashboard\Foundations\Domain\SponsorAds\Repositories\SponsorAdRepositoryInterface;
 use BasicDashboard\Spa\Articles\Resources\ArticleResource;
 use BasicDashboard\Spa\Articles\Resources\HomeArticleResource;
+use BasicDashboard\Spa\Articles\Resources\SiteMapArticleResource;
 use BasicDashboard\Spa\Common\BaseSpaController;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -42,6 +43,12 @@ class ArticleService extends BaseSpaController
         return $this->sendResponse(message: "Index success", data: $data);
     }
 
+    public function sitemapFetch() : JsonResponse
+    {
+        $data = $this->articleRepositoryInterface->getSiteMapArticle();
+        $data = SiteMapArticleResource::collection(resource: $data)->response()->getData(assoc: true);
+        return $this->sendResponse(message: "Index success", data: $data);
+    }
     ///////////////////////////This is Method Divider///////////////////////////////////////
 
     public function show(string $id): JsonResponse

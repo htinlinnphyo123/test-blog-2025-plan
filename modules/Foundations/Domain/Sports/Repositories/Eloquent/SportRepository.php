@@ -49,9 +49,6 @@ class SportRepository extends BaseRepository implements SportRepositoryInterface
     public function getSportForSPA($params) : Collection | array | \Illuminate\Database\Eloquent\Collection | \Illuminate\Database\Eloquent\Model
     {
         return $this->filterSport($params)
-            ->when(isset($params['status']) && $params['status'],function($query) use($params){
-                return $query->where('status',$params['status']);
-            })
             ->orderBy('time', 'desc')
             ->get();
     }

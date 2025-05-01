@@ -23,6 +23,7 @@ interface ArticleRepositoryInterface extends BaseRepositoryInterface
     public function getArticleList($params): LengthAwarePaginator;
     //forMobile Sections
     public function getArticles(array $params): LengthAwarePaginator;
+    public function getSiteMapArticle() : Collection;
     //increment method is implement in BaseRepository
     public function increment($id, $field, $count = 1): int;
 
