@@ -25,8 +25,7 @@ class IndexSportRequest extends FormRequest
     {
         return [
             "date" => "nullable|date",
-            "page" => "nullable|integer",
-            "limit" => "nullable|integer",
+            "status" => ""
         ];
     }
 }
