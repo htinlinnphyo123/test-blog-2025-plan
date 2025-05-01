@@ -25,6 +25,7 @@ class SportResource extends JsonResource
             "status"=> $this->status?->label(),
             "image"=>$this->image ? Storage::url($this->image):null,
             "date" => $this->date && $this->time ? \Carbon\Carbon::parse($this->date . ' ' . $this->time)->diffForHumans() : null,
+            "updated_at" => $this->updated_at
         ];
     }
 }
