@@ -224,9 +224,12 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
                 ->get())->response()->getData(true)['data'];
     }
 
-    public function getModelWithoutEncodedId(string $id) : Article|null
+    public function getModelWithoutEncodedId(mixed $id) : Article|null
     {
-        return $this->model->where('id',$id)->first();
+        if(is_numeric($id)) {
+            return $this->model->where('id', $id)->first();
+        }
+        return $this->model->where('slug', $id)->first();
     }
 
 }

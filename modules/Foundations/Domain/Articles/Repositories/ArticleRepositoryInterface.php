@@ -38,5 +38,5 @@ interface ArticleRepositoryInterface extends BaseRepositoryInterface
     public function getRelatedArticles(string $id,string $categoryId, int $limit = 3): Collection;
     public function homeCategory($params): LengthAwarePaginator;
     public function getHomeData($categories, int $articleLimit = 4, int $videoLimit = 2, int $audioLimit = 2): array;
-    public function getModelWithoutEncodedId(string $id) : Article|null;
+    public function getModelWithoutEncodedId(mixed $id) : Article|null;
 }

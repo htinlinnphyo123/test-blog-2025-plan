@@ -24,6 +24,7 @@ class SiteMapArticleResource extends JsonResource
         return [
             "id" => $this->id,
             "title" => $this->title,
+            "slug" => $this->slug,
             "thumbnail" => retrievePublicFile($this->thumbnail),
             "updated_at" => $this->updated_at
         ];

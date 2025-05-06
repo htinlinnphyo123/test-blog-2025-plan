@@ -26,6 +26,7 @@ class HomeArticleResource extends JsonResource
             "title" => $this->title,
             "thumbnail" => retrievePublicFile($this->thumbnail),
             "category_name" => $this->category?->name,
+            "slug" => $this->slug,
             "date" => $this->created_at->diffForHumans(),
             "updated_at" => $this->updated_at
         ];
