@@ -73,7 +73,7 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     public function getSiteMapArticle() : Collection
     {
         return $this->connection()
-            ->select(['id','title','updated_at','thumbnail'])
+            ->select(['id','title','slug','updated_at','thumbnail'])
             ->get();
     }
 
